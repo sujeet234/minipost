@@ -1,5 +1,6 @@
 let express=require("express");
 let app = express();
+let axios = require("axios");
 app.use(express.json());
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin","*");
@@ -18,7 +19,6 @@ app.use(function(req,res,next){
 const port =  2410;
 app.listen(port,()=>console.log(`Listening on port ${port}`));
 
-let axios = require("axios");
 
 let urls = [];
 
