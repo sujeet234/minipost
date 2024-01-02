@@ -22,15 +22,18 @@ const port =  2410;
 app.listen(port,()=>console.log(`Listening on port ${port}`));
 
 
-let urls = [];
+// let urls = [];
+let url="";
 
 app.get("/myServer",function(req,res){
     // let baseURL = "https://jsonplaceholder.typicode.com";
-    let baseURL = urls.map((el)=>el.url);
+    // let baseURL = urls.map((el)=>el.url);
+    let baseURL=url;
     axios.get(baseURL).then((response)=>{
         let {data} = response;
-        // console.log("myServer get ",data);
+        console.log("myServer get ",data);
         res.send(data);
+        // url="";
     })   
     .catch((err)=>{
         if(err.response){
@@ -46,14 +49,15 @@ app.get("/myServer",function(req,res){
   
 app.post("/urls",function(req,res){
     let body = req.body;
-    urls.push({method:body.method,url:body.url});
-    console.log("new urls",urls);    
+    // urls.push({method:body.method,url:body.url});
+    url=body.url;
+    console.log("new urls",url);    
 })
 
 
 app.post("/myServer",function(req,res){
-    let body = req.body.data;
-    let baseURL = urls.map((el)=>el.url);
+    let body = req.body;
+    let baseURL = url;
     // let baseURL = "https://jsonplaceholder.typicode.com";
     axios.post(baseURL,body).then((response)=>{
         res.send(response.data);
