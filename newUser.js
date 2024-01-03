@@ -22,7 +22,6 @@ const port =  2410;
 app.listen(port,()=>console.log(`Listening on port ${port}`));
 
 
-// let urls = [];
 let url="";
 
 app.get("/myServer",function(req,res){
@@ -56,7 +55,7 @@ app.post("/myServer",function(req,res){
     let baseURL = url;
     axios.post(baseURL,body).then((response)=>{
         res.send(response.data);
-        console.log("post Data ",response.data);
+        // console.log("post Data ",response.data);
     })
     .catch((err)=>{
         if(err.response){
