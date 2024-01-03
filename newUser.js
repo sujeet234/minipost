@@ -26,8 +26,6 @@ app.listen(port,()=>console.log(`Listening on port ${port}`));
 let url="";
 
 app.get("/myServer",function(req,res){
-    // let baseURL = "https://jsonplaceholder.typicode.com";
-    // let baseURL = urls.map((el)=>el.url);
     let baseURL=url;
     axios.get(baseURL).then((response)=>{
         let {data} = response;
@@ -38,7 +36,6 @@ app.get("/myServer",function(req,res){
     .catch((err)=>{
         if(err.response){
         let {status,statusText} = err.response;
-        // console.log(err.response);
         res.status(status).send(statusText);
         }
         else {
@@ -49,7 +46,6 @@ app.get("/myServer",function(req,res){
   
 app.post("/urls",function(req,res){
     let body = req.body;
-    // urls.push({method:body.method,url:body.url});
     url=body.url;
     console.log("new urls",url);    
 })
@@ -58,7 +54,6 @@ app.post("/urls",function(req,res){
 app.post("/myServer",function(req,res){
     let body = req.body;
     let baseURL = url;
-    // let baseURL = "https://jsonplaceholder.typicode.com";
     axios.post(baseURL,body).then((response)=>{
         res.send(response.data);
         console.log("post Data ",response.data);
