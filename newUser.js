@@ -28,7 +28,7 @@ app.get("/myServer",function(req,res){
     let baseURL=url;
     axios.get(baseURL).then((response)=>{
         let {data} = response;
-        console.log("myServer get ",data);
+        // console.log("myServer get ",data);
         res.send(data);
         // url="";
     })   
@@ -42,6 +42,28 @@ app.get("/myServer",function(req,res){
         }
     })
 })
+
+app.get("/myServer/:id",function(req,res){
+    let baseURL=url;
+    // let id = req.params.id;
+    axios.get(baseURL).then((response)=>{
+        let {data} = response;
+        console.log("myServer get ",data);
+        // let arr = data.map((ele)=>ele.id == id)
+        res.send(data);
+        // url="";
+    })   
+    .catch((err)=>{
+        if(err.response){
+        let {status,statusText} = err.response;
+        res.status(status).send(statusText);
+        }
+        else {
+            res.status(404).send(err);
+        }
+    })
+})
+
   
 app.post("/urls",function(req,res){
     let body = req.body;
